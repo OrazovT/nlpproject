@@ -28,7 +28,7 @@ def clean_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     df["abstract_length"] = df["abstract"].str.len()
     return df
 if __name__ == "__main__":
-    OUTPUT_PATH.parent.mkdir(parents=True, exist_ok="True")
+    OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     raw_df = pd.read_csv(INPUT_PATH)
     clean_df = clean_dataframe(raw_df)
     clean_df.to_csv(OUTPUT_PATH, index=False)

@@ -1,0 +1,5 @@
+Source: https://www.jmlr.org/
+
+The Journal of Machine Learning Research (JMLR), established in 2000, provides an international forum
+for the electronic and paper publication of high-quality scholarly articles in all areas of machine
+learning. All published papers are freely available online.
