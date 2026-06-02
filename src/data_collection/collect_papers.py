@@ -39,8 +39,18 @@ def extract_paper_data(abs_url: str) -> dict:
     html = get_html(abs_url)
     soup = BeautifulSoup(html, "html.parser")
     page_text = soup.get_text("\n", strip=True)
-    title_tag = soup.find("h1")
-    title = title_tag.get_text(" ", strip=True) if title_tag else ""
+    
+    title = ""
+    meta_title = soup.find("meta", attrs={"name": "citation_title"})
+    if meta_title and meta_title.get("content"):
+        title = meta_title["content"].strip()
+    if not title:
+        page_title = soup.find("title")
+        if page_title:
+            title = page_title.get_text(" ", strip=True)
+    if not title:
+        heading = soup.find(["h1", "h2", "h3"])
+        if heading: title = heading.get_text(" ", strip=True)
     year_match = re.search(r"\b(20\d{2})\b", page_text)
     year = int(year_match.group(1)) if year_match else None
 
