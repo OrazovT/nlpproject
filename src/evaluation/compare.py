@@ -26,7 +26,7 @@ def print_summary(combined_df: pd.DataFrame) -> None:
 
     correlation = combined_df["tfidf_score"].corr(combined_df["embedding_score"])
 
-    print("\nrelation:")
+    print("\ncorrelation:")
     print(correlation)
 
     print("\nlowest embedding papers:")
