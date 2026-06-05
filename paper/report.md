@@ -63,6 +63,15 @@ These scores are then compared to understand whether lexical similarity and sema
 
 The final dataset contains 80 JMLR article abstracts. For each abstract, two alignment scores were calculated: one using TF-IDF and one using transformer-based sentence embeddings.
 
+The main numerical results are summarized in Table 1.
+
+| Method | Mean | Min | Max |
+|---|---:|---:|---:|
+| TF-IDF + cosine similarity | 0.020 | 0.001 | 0.105 |
+| Embeddings + cosine similarity | 0.219 | 0.067 | 0.409 |
+
+Table 1. Summary of alignment scores for the two methods.
+
 ### 3.1 TF-IDF Results
 
 The TF-IDF similarity scores were generally low. The mean TF-IDF score was approximately **0.020**, with a maximum value of approximately **0.105**. This indicates that the direct vocabulary overlap between the JMLR Aims & Scope and the article abstracts is limited.
@@ -70,6 +79,12 @@ The TF-IDF similarity scores were generally low. The mean TF-IDF score was appro
 This result is expected because the Aims & Scope text is short and general, while the abstracts are much more technical and specific. For example, many abstracts focus on topics such as optimization, matrix methods, dynamical systems, and theoretical learning problems. These topics may be relevant to machine learning, but they do not always use the same broad vocabulary as the journal description.
 
 Therefore, the TF-IDF baseline suggests that abstracts are not strongly aligned with the Aims & Scope at the lexical level.
+
+Figure 1 presents the distribution of TF-IDF alignment scores.
+
+![TF-IDF score distribution](../results/plots/tfidf_histogram.png)
+
+Figure 1. Distribution of TF-IDF alignment scores.
 
 ### 3.2 Embedding-Based Results
 
@@ -79,6 +94,10 @@ This suggests that the abstracts are more semantically related to the journal sc
 
 This difference between TF-IDF and embeddings is important. TF-IDF mainly captures word overlap, while transformer embeddings capture broader semantic similarity. For this reason, embeddings are more suitable for detecting thematic alignment when abstracts use specialized technical terminology.
 
+Figure 2 shows the distribution of embedding-based alignment scores.
+
+![Embedding score distribution](../results/plots/embedding_histogram.png)
+
 ### 3.3 Comparison Between Methods
 
 The correlation between TF-IDF and embedding scores was approximately **0.279**. This is a weak positive correlation.
@@ -86,6 +105,10 @@ The correlation between TF-IDF and embedding scores was approximately **0.279**.
 This means that the two methods are somewhat related, but they do not produce the same ranking of abstracts. Some abstracts may have low TF-IDF scores because they use different vocabulary from the Aims & Scope, while still having moderate embedding scores because their meaning is related to machine learning.
 
 This result supports the idea that lexical similarity and semantic similarity capture different aspects of thematic alignment.
+
+Figure 3 compares TF-IDF and embedding scores for the same abstracts.
+
+![TF-IDF vs Embedding scores](../results/plots/score_comparison.png)
 
 ### 3.4 Outlier Analysis
 
@@ -122,6 +145,15 @@ The outlier analysis showed that the lowest-alignment abstracts were often highl
 Overall, the project suggests that article abstracts can be useful indicators of a journal's thematic focus, but they should not be treated as perfect representations. The result depends strongly on the representation method used. TF-IDF may underestimate alignment when texts use different vocabulary, while embeddings provide a more flexible semantic comparison.
 
 The main limitation of this project is that the Aims & Scope text is short and general. A richer reference description of the journal could produce more stable alignment scores. Another limitation is the dataset size, which contains 80 abstracts from recent JMLR volumes. Future work could extend the dataset, include full paper texts, compare several journals, or use more detailed topic modeling methods.
+
+## References
+
+1. Journal of Machine Learning Research. Official website and paper archive.  
+   https://www.jmlr.org/
+
+2. Pedregosa, F. et al. Scikit-learn: Machine Learning in Python. Journal of Machine Learning Research, 12, 2825–2830, 2011.
+
+3. Reimers, N. and Gurevych, I. Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks. EMNLP-IJCNLP, 2019.
 
 ## AI Usage Disclaimer
 
